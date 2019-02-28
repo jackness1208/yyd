@@ -1,0 +1,36 @@
+{
+  "name": "yyd",
+  "version": "0.0.1",
+  "preferGlobal": true,
+  "engines": {
+    "node": ">= 8.0.0"
+  },
+  "bin": {
+    "yyd": "bin/init.js"
+  },
+  "description": "docker builder cli",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackness1208/yyd.git"
+  },
+  "keywords": [
+    "yyd",
+    "docker"
+  ],
+  "author": "jackness",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackness1208/yyd/issues"
+  },
+  "homepage": "https://github.com/jackness1208/yyd#readme",
+  "dependencies": {
+    "yyl-fs": "^0.2.0",
+    "yyl-os": "^0.2.0",
+    "yyl-print": "^0.7.1",
+    "yyl-util": "^2.2.0"
+  }
+}
