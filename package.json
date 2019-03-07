@@ -1,6 +1,6 @@
 {
   "name": "yyd",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "preferGlobal": true,
   "engines": {
     "node": ">= 8.0.0"
@@ -11,7 +11,7 @@
   "description": "docker builder cli",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest ./test/jest/ --env=node"
   },
   "repository": {
     "type": "git",
@@ -34,5 +34,9 @@
     "yyl-print": "^0.7.1",
     "yyl-replacer": "^0.1.0",
     "yyl-util": "^2.2.0"
+  },
+  "devDependencies": {
+    "jest": "^24.1.0",
+    "yyl-seed-test-util": "^0.3.1"
   }
 }
