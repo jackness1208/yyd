@@ -1,13 +1,12 @@
+const pkg = require('./package.json');
 module.exports = {
   // docker 名称
   repository: '__data("repository")',
   // tag
-  tag: '0.1.0',
+  tag: pkg.version,
   // 推送的
-  pushHost: 'harbor.yy.com',
-  pushHostPrefix: 'front_end',
+  pushHost: '',
+  pushPrefix: '',
   // 自动 更新 history
-  rewriteHistory: true,
-  // 加速地址
-  registryMirror: 'registry.docker-cn.com'
+  rewriteHistory: true
 };
