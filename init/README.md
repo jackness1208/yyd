@@ -11,19 +11,24 @@ npm install yyd -g
 ## 相关命令
 ```
 # 启动 本地 __data('repository') 镜像
-yyd start
-
-# 启动相关参数查看
-yyd start --help
+yyd run
+yyd r
 
 # 开始打包 __data('repository') 镜像
 yyd build
+yyd b
+
+# 开始打包 __data('repository') 镜像 并且禁用缓存
+yyd build --no-cache
+yyd b --no-cache
 
 # 发布 __data('repository') 镜像 同时 发布 __data('repository'):release
-yyd release
+yyd push
+yyd p
 
 # 发布 __data('repository') 镜像 同时 发布 __data('repository'):beta
-yyd release --tag beta
+yyd push --tag beta
+yyd p --tag beta
 
 # 清除除了当前 config.tag 外的 __data('repository') 镜像 和匿名镜像
 yyd clean

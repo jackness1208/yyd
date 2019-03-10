@@ -19,25 +19,27 @@ yyd init --repository yyl --tag 0.1.0
 # 开始根据 当前目录中的 yyd.config.js 中的 config.repository, config.tag,
 # 构建 docker
 yyd build
+yyd b
 ```
 
-### yyd start
+### yyd run
 
 ```
 # 开始根据 当前目录中的 yyd.config.js 中的 config.repository, config.tag,
 # 运行对应的 docker
-yyd start
+yyd run
+yyd r
 ```
 
-### yyd release
+### yyd push
 
 ```
 # 开始根据 当前目录中的 yyd.config.js 中的 config.repository, config.tag,
 # 发布镜像到 remote 并且 发布 ${config.repository}:latest 版本
-yyd release
+yyd push
 
 # 发布镜像到 remote 并且 发布 ${config.repository}:beta 版本
-yyd release --tag beta
+yyd push --tag beta
 ```
 
 ### yyd clean
