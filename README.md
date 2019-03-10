@@ -31,6 +31,12 @@ yyd run
 yyd r
 ```
 
+### yyd stop
+```
+# 停止所有正在运行的 docker
+yyd stop
+```
+
 ### yyd push
 
 ```

@@ -14,6 +14,9 @@ npm install yyd -g
 yyd run
 yyd r
 
+# 关闭所有正在运行的 docker
+yyd stop
+
 # 开始打包 __data('repository') 镜像
 yyd build
 yyd b
