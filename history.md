@@ -3,15 +3,26 @@
 * [ADD] `yyd init`
 * [ADD] `yyd b`
 * [ADD] `yyd build`
-* [ADD] `yyd r`
-* [ADD] `yyd release`
-* [ADD] `yyd r --tag beta`
-* [ADD] `yyd release --tag beta`
+* [ADD] `yyd p`
+* [ADD] `yyd push`
+* [ADD] `yyd p --tag beta`
+* [ADD] `yyd push --tag beta`
 * [ADD] `yyd man`
 * [ADD] `yyd -v`
 * [ADD] `yyd --version`
 * [ADD] `yyd -h`
 * [ADD] `yyd --help`
+* [ADD] `yyd stop`
+* [ADD] `yyd clean`
+* [ADD] `config.repository`
+* [ADD] `config.tag`
+* [ADD] `config.pushHost`
+* [ADD] `config.pushPrefix`
+* [ADD] `config.rewriteHistory`
+* [ADD] `config.portMap`
+* [ADD] `config.volume`
+* [ADD] `config.commands`
+
 ## 0.0.1 (2019-02-28)
 * [ADD] 先占个坑
 
