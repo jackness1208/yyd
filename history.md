@@ -1,4 +1,7 @@
 # 历史信息
+## 0.1.1-beta1 (2019-03-19)
+* [FIX] 修复 `yyd --config` 时， `config.volume` 路径 不对问题
+
 ## 0.1.0 (2019-03-07)
 * [ADD] `yyd init`
 * [ADD] `yyd b`
