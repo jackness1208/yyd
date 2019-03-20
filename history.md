@@ -1,4 +1,8 @@
 # 历史信息
+## 0.2.0 (2019-03-20)
+* [EDIT] `yyd run` 重复执行时不会重新跑 `docker run` 命令
+* [EDIT] 兼容 `win 7` 系统的 docker 端口检查 命令
+
 ## 0.1.1-beta1 (2019-03-19)
 * [FIX] 修复 `yyd --config` 时， `config.volume` 路径 不对问题
 
