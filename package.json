@@ -1,6 +1,6 @@
 {
   "name": "yyd",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "preferGlobal": true,
   "engines": {
     "node": ">= 8.0.0"
@@ -30,7 +30,7 @@
   "dependencies": {
     "inquirer": "^6.2.2",
     "yyl-fs": "^0.2.0",
-    "yyl-os": "^0.4.0",
+    "yyl-os": "^0.5.0",
     "yyl-print": "^0.7.3",
     "yyl-replacer": "^0.1.0",
     "yyl-util": "^2.2.0"
