@@ -25,7 +25,7 @@ yyd b
 yyd build --no-cache
 yyd b --no-cache
 
-# 发布 __data('repository') 镜像 同时 发布 __data('repository'):release
+# 发布 __data('repository') 镜像 同时 发布 __data('repository'):latest
 yyd push
 yyd p
 
