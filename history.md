@@ -1,4 +1,7 @@
 # 历史信息
+## 0.2.1 (2019-03-21)
+* [FIX] 修复 `yyd run` `config.portMap` 没配置会报错问题
+
 ## 0.2.0 (2019-03-20)
 * [EDIT] `yyd run` 重复执行时不会重新跑 `docker run` 命令
 * [EDIT] 兼容 `win 7` 系统的 docker 端口检查 命令
