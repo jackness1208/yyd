@@ -1,6 +1,6 @@
 {
   "name": "yyd",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "preferGlobal": true,
   "engines": {
     "node": ">= 8.0.0"
