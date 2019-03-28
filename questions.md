@@ -3,8 +3,8 @@
 ## windows7下遇到：cgroups: cannot find cgroup mount destination: unknown
 解决方法:
 ```
-docker-machine.exe ssh default sudo mkdir /sys/fs/cgroup/systemd
-docker-machine.exe ssh default sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
+docker-machine ssh default sudo mkdir /sys/fs/cgroup/systemd
+docker-machine ssh default sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
 ```
 
 ## centos7 安装 docker
@@ -27,4 +27,10 @@ Transaction check error:
 ```
 卸载旧版本包
 sudo yum erase docker-common-2:1.12.6-68.gitec8512b.el7.centos.x86_64
+```
+
+## Failed to get D-Bus connection: No such file or directory
+```
+docker-machine ssh default sudo mkdir -p /sys/fs/cgroup/systemd
+docker-machine ssh default sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
 ```
