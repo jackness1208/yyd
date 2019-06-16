@@ -1,5 +1,9 @@
 # yyd
-提供 docker 一系列操作的 脚手架
+* 用于简化 docker 命令行操作的脚手架
+* 通过配置 `yyd.config.js` 快速运行 docker images, 自动查询并终止正在运行的同源镜像，可自定义后置脚本操作, 简化命令行.
+* 一键清除 docker 匿名镜像 和 小于当前版本的 同源镜像
+* 简化 `docker build` 操作
+* 经过封装后 docker 可以push 到多个 服务器
 
 ## api
 

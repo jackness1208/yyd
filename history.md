@@ -1,4 +1,10 @@
 # 历史信息
+## 0.2.3 (2019-06-16)
+* [FIX] 修复 在配置 `config.port` 情况下 macos 执行 `yyd r` 会报错 `/sbin/init is not a directory` 的问题
+
+## 0.2.2 (2019-03-28)
+* [FIX] 修复 `yyd run` `clean cache` 逻辑查询 cache 失败问题
+
 ## 0.2.1 (2019-03-21)
 * [FIX] 修复 `yyd run` `config.portMap` 没配置会报错问题
 * [FIX] 修复 `yyd run` 不需要暴露端口的， 拆分为单独函数
