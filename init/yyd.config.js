@@ -8,7 +8,7 @@ module.exports = {
   pushHost: '',
   pushPrefix: '',
   // 自动 更新 history
-  rewriteHistory: true,
+  rewriteHistory: true
 
   // port 映射
   // portMap: {
@@ -19,9 +19,4 @@ module.exports = {
   // volume: {
   //   './autorun': '/autorun'
   // },
-
-  // run or exec 后需要执行的 命令
-  // commands: [
-  //   '/autorun/init.sh'
-  // ]
 };

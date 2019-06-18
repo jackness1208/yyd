@@ -1,4 +1,7 @@
 # 历史信息
+## 0.3.0 (*)
+* [DEL] 去掉 config.commands 参数
+
 ## 0.2.3 (2019-06-16)
 * [FIX] 修复 在配置 `config.port` 情况下 macos 执行 `yyd r` 会报错 `/sbin/init is not a directory` 的问题
 
