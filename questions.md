@@ -34,3 +34,10 @@ sudo yum erase docker-common-2:1.12.6-68.gitec8512b.el7.centos.x86_64
 docker-machine ssh default sudo mkdir -p /sys/fs/cgroup/systemd
 docker-machine ssh default sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
 ```
+
+## docker-machine no space
+```
+docker-machine rm default
+docker-machine create --driver virtualbox --virtualbox-disk-size "100100" default
+docker-machine env default
+```
