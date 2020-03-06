@@ -7,11 +7,11 @@ const build = require('./build')
 module.exports = async function({ config, env }) {
   print.fn.cost.start()
   if (!config.repository) {
-    throw 'config.repository must have value'
+    throw new Error('config.repository must have value')
   }
 
   if (!config.tag) {
-    throw 'config.tag must have value'
+    throw new Error('config.tag must have value')
   }
 
   await build({ env })

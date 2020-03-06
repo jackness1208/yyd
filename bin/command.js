@@ -27,20 +27,31 @@ function printHeader({ env }) {
   }
 }
 
+let IS_MATCH = false
+
 /** path */
-cmder.options('-p, --path', LANG.DESCRIPTION.PATH, () => {
+cmder.option('-p, --path', LANG.DESCRIPTION.PATH, () => {
   task.path({ env })
+  IS_MATCH = true
 })
 
 /** version */
-cmder.options('-v, --version', LANG.DESCRIPTION.VERSION, () => {
+cmder.option('-v, --version', LANG.DESCRIPTION.VERSION, () => {
   task.version({ env })
+  IS_MATCH = true
 })
 
 /** options */
 cmder
   .option('-q, --silent', LANG.DESCRIPTION.SILENT)
   .option('--logLevel <level>', LANG.DESCRIPTION.LOG_LEVEL)
+
+cmder
+  .option('-h, --help', LANG.DESCRIPTION.HELP, () => {
+    print.cleanScreen()
+    cmder.outputHelp()
+    IS_MATCH = true
+  })
 
 /** build */
 cmder
@@ -53,6 +64,7 @@ cmder
     task.build({ config, env }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
     })
+    IS_MATCH = true
   })
 
 /** clean */
@@ -64,6 +76,7 @@ cmder
     task.clean({ config }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
     })
+    IS_MATCH = true
   })
 
 /** init */
@@ -75,6 +88,7 @@ cmder
     task.init({ env }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
     })
+    IS_MATCH = true
   })
 
 /** man */
@@ -86,6 +100,7 @@ cmder
     task.man({ env, config }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
     })
+    IS_MATCH = true
   })
 
 /** push */
@@ -98,18 +113,23 @@ cmder
     task.push({ env, config }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
     })
+    IS_MATCH = true
   })
 
 /** run */
 cmder
-  .command('run')
+  .command('run [name]')
   .alias('r')
   .description(LANG.DESCRIPTION.RUN)
-  .action(() => {
-    const config = initConfig()
-    task.run({ env, config }).catch((er) => {
+  .action((name) => {
+    let config = {}
+    if (!name) {
+      config = initConfig()
+    }
+    task.run({ env, config, name }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
     })
+    IS_MATCH = true
   })
 
 /** stop */
@@ -121,4 +141,14 @@ cmder
     task.stop({ env, config }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
     })
+    IS_MATCH = true
   })
+
+cmder.parse(process.argv)
+
+cmder.name('yyd')
+
+if (!IS_MATCH) {
+  print.cleanScreen()
+  cmder.outputHelp()
+}

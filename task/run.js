@@ -4,6 +4,7 @@ const util = require('yyl-util')
 const chalk = require('chalk')
 const fs = require('fs')
 const extOs = require('yyl-os')
+const LANG = require('../lang/index')
 
 const { CONFIG_PATH, PROJECT_PATH } = require('../lib/const')
 const { queryDockerLogList, checkDockerPort } = require('../lib/util')
@@ -25,17 +26,27 @@ async function runSimple({ config }) {
     })
   }
   const cmd = `docker run -t -i ${volumeArr.join(' ')} ${config.repository}:${config.tag} /bin/bash`
-  print.log.info(`run this cmd manual: ${chalk.yellow.bold(cmd)}`)
+  print.log.info(`${LANG.RUN.RUN_MANUAL}: ${chalk.yellow.bold(cmd)}`)
   await extOs.clip(cmd)
-  print.log.success('the manual cmd already in clipboard')
+  print.log.success(LANG.RUN.CLIPED)
 }
 
-async function run ({ config }) {
+async function runImage({ name, env }) {
+  const cmd = `docker run -i -t ${name} ${util.envStringify(env)} /bin/bash`
+  await extOs.clip(cmd)
+  print.log.info(`${LANG.RUN.RUN_MANUAL}: ${chalk.yellow.bold(cmd)}`)
+  print.log.success(LANG.RUN.CLIPED)
+}
+
+async function run ({ config, name, env }) {
+  if (name) {
+    return await runImage({ name, env })
+  }
   if (!config.repository) {
-    throw 'config.repository must have value'
+    throw new Error(LANG.RUN.REPOSITORY_NULL)
   }
   if (!config.tag) {
-    throw 'config.tag must have value'
+    throw new Error(LANG.RUN.TAG_NULL)
   }
 
   const iName = `${config.repository}_${config.tag}`
@@ -45,33 +56,33 @@ async function run ({ config }) {
   }
 
   // step 01
-  print.log.info(`${chalk.cyan('step 1')}, check docker ${chalk.yellow(iName)} status`)
+  print.log.info(`${chalk.cyan('step 1')} - ${LANG.RUN.CHECK_IMAGE_STATUS}: ${chalk.yellow(iName)}`)
   const runningId = queryDockerLogList(
     await extOs.runCMD('docker ps', PROJECT_PATH, false),
     iName,
     6
   ).map((arr) => arr[0])[0]
   if (runningId) {
-    print.log.info('running, next step')
+    print.log.info(LANG.RUN.IMAGE_IS_RUNNING)
   } else {
-    print.log.info('not exists, check cache start')
+    print.log.info(LANG.RUN.IMAGE_NOT_RUNNING)
 
     const cacheId = queryDockerLogList(
       await extOs.runCMD('docker ps -a', PROJECT_PATH, false),
       iName
     ).map((arr) => arr[0])[0]
     if (cacheId) {
-      print.log.info(`remove the cache id: ${chalk.yellow(cacheId)}`)
+      print.log.info(`${LANG.RUN.REMOVE_CACHE_ID}: ${chalk.yellow(cacheId)}`)
       await extOs.runCMD(`docker rm ${cacheId}`)
     } else {
-      print.log.info('no cache')
+      print.log.info(LANG.RUN.NO_IAMGE_CACHE)
     }
 
     if (config.portMap) {
       await util.forEach(Object.keys(config.portMap), async (key) => {
         const canUse = await checkDockerPort(key)
         if (!canUse) {
-          throw `port ${key} was occupied, please check`
+          throw new Error(`${LANG.RUN.PORT_OCCUPIED}: ${key}`)
         }
       })
     }
@@ -101,7 +112,7 @@ async function run ({ config }) {
 
     const extV = '-v /sys/fs/cgroup:/sys/fs/cgroup:ro'
     const cmd01 = `docker run --privileged --name ${iName} -d -ti ${extV} ${portArgv.join(' ')} ${volumeArr.join(' ')} ${config.repository}:${config.tag}`
-    print.log.info(`run cmd: ${chalk.yellow.bold(cmd01)}`)
+    print.log.info(`${LANG.RUN.RUN_CMD}: ${chalk.yellow.bold(cmd01)}`)
     try {
       await extOs.runCMD(cmd01, PROJECT_PATH)
     } catch (er) {
@@ -111,13 +122,13 @@ async function run ({ config }) {
 
   // step 02
   const cmd02 = 'docker ps'
-  print.log.info(`${chalk.cyan('step 2')}, find the running imageid which name = ${iName}`)
-  print.log.info(`run cmd: ${chalk.yellow.bold(cmd02)}`)
+  print.log.info(`${chalk.cyan('step 2')} - ${LANG.RUN.FIND_RUNNIN_IMAGE}: ${iName}`)
+  print.log.info(`${LANG.RUN.RUN_CMD}: ${chalk.yellow.bold(cmd02)}`)
   const logStr = await extOs.runCMD(cmd02, PROJECT_PATH, false)
   const curId = queryDockerLogList(logStr, iName, 6).map((arr) => arr[0])[0]
 
   if (!curId) {
-    print.log.warn(`${iName} not found in ${chalk.yellow(cmd02)}`)
+    print.log.warn(`${iName} ${LANG.RUN.NOT_FOUND}: ${chalk.yellow(cmd02)}`)
     return
   }
 
@@ -129,12 +140,12 @@ async function run ({ config }) {
     const ip = ipStr
       .replace(/^.*(\d+\.\d+\.\d+\.\d+).*$/, '$1')
       .replace(/[\r\n]+/g, '')
-    print.log.info(`docker machine IP: ${chalk.yellow.bold(ip)}`)
+    print.log.info(`${LANG.RUN.DOCKER_MAC_IP}: ${chalk.yellow.bold(ip)}`)
   }
-  print.log.info(`run this cmd manual: ${chalk.yellow.bold(cmd03)}`)
+  print.log.info(`${LANG.RUN.RUN_MANUAL}: ${chalk.yellow.bold(cmd03)}`)
   await extOs.clip(cmd03)
-  print.log.success('the manual cmd already in clipboard')
+  print.log.success(LANG.RUN.CLIPED)
   return cmd03
 }
 
-module.exprots = run
+module.exports = run
