@@ -1,6 +1,6 @@
 {
   "name": "yyd",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "preferGlobal": true,
   "engines": {
     "node": ">= 8.0.0"
@@ -10,6 +10,75 @@
   },
   "description": "docker builder cli",
   "main": "index.js",
+  "eslintConfig": {
+    "env": {
+      "mocha": true,
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:node/recommended"
+    ],
+    "rules": {
+      "semi": [
+        "error",
+        "never"
+      ],
+      "node/no-unpublished-require": [
+        0
+      ],
+      "node/exports-style": [
+        "error",
+        "module.exports"
+      ],
+      "node/file-extension-in-import": [
+        "error",
+        "always"
+      ],
+      "node/prefer-global/buffer": [
+        "error",
+        "always"
+      ],
+      "node/prefer-global/console": [
+        "error",
+        "always"
+      ],
+      "node/prefer-global/process": [
+        "error",
+        "always"
+      ],
+      "node/prefer-global/url-search-params": [
+        "error",
+        "always"
+      ],
+      "node/prefer-global/url": [
+        "error",
+        "always"
+      ],
+      "node/prefer-promises/dns": "error",
+      "node/prefer-promises/fs": 0,
+      "quote-props": [
+        "error",
+        "consistent"
+      ],
+      "no-empty": [
+        "error",
+        {
+          "allowEmptyCatch": true
+        }
+      ],
+      "indent": [
+        "warn",
+        2
+      ]
+    }
+  },
+  "eslintIgnore": [
+    "node_modules",
+    "/test/case",
+    "yyt",
+    "__frag"
+  ],
   "scripts": {
     "test": "jest ./test/jest/ --env=node"
   },
@@ -28,14 +97,18 @@
   },
   "homepage": "https://github.com/jackness1208/yyd#readme",
   "dependencies": {
-    "inquirer": "^6.2.2",
-    "yyl-fs": "^0.2.0",
-    "yyl-os": "^0.5.0",
-    "yyl-print": "^0.7.3",
-    "yyl-replacer": "^0.1.0",
-    "yyl-util": "^2.2.0"
+    "chalk": "3.0.0",
+    "commander": "4.1.1",
+    "inquirer": "7.0.6",
+    "yyl-fs": "0.3.3",
+    "yyl-os": "0.10.3",
+    "yyl-print": "0.7.5",
+    "yyl-replacer": "0.2.1",
+    "yyl-util": "2.3.8"
   },
   "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-node": "^11.0.0",
     "ject": "^1.1.0",
     "yyl-seed-test-util": "^0.3.1"
   }
