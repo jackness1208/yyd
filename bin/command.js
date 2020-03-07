@@ -43,8 +43,13 @@ cmder.option('-v, --version', LANG.DESCRIPTION.VERSION, () => {
 
 /** options */
 cmder
-  .option('-q, --silent', LANG.DESCRIPTION.SILENT)
-  .option('--logLevel <level>', LANG.DESCRIPTION.LOG_LEVEL)
+  .option('-q, --silent', LANG.DESCRIPTION.SILENT, () => {
+    print.log.silent(true)
+  })
+  .option('--logLevel <level>', LANG.DESCRIPTION.LOG_LEVEL, (level) => {
+    print.log.setLogLevel(level)
+  })
+  .option('--force', LANG.DESCRIPTION.FORCE)
 
 cmder
   .option('-h, --help', LANG.DESCRIPTION.HELP, () => {

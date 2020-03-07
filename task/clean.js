@@ -6,7 +6,7 @@ const { PROJECT_PATH } = require('../lib/const')
 const LANG = require('../lang/index')
 const chalk = require('chalk')
 
-module.exports = async function ({ config }) {
+module.exports = async function ({ config, env }) {
   const curName = config.repository
   const curTag = config.tag
   let curId = ''
@@ -54,12 +54,18 @@ module.exports = async function ({ config }) {
     infoLog = `${infoLog}<none> repository ${chalk.yellow.bold(noneList.length)} files`
     print.log.info(infoLog)
 
-    const prompt = inquirer.createPromptModule()
-    const d = await prompt([{
-      name: 'ok',
-      message: 'ok?',
-      type: 'confirm'
-    }])
+    let d = {}
+    if (env.force) {
+      d.ok = true
+    } else {
+      const prompt = inquirer.createPromptModule()
+      d = await prompt([{
+        name: 'ok',
+        message: 'ok?',
+        type: 'confirm'
+      }])
+    }
+    
 
     if (d.ok) {
       print.log.cmd(`${LANG.RUN.RUN_CMD}: ${chalk.yellow.bold(cmd)}`)

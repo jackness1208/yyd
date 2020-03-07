@@ -1,6 +1,6 @@
 {
   "name": "yyd",
-  "version": "0.4.0",
+  "version": "0.3.0",
   "preferGlobal": true,
   "engines": {
     "node": ">= 8.0.0"
@@ -80,7 +80,16 @@
     "__frag"
   ],
   "scripts": {
-    "test": "jest ./test/jest/ --env=node"
+    "test": "mocha ./test/mocha --timeout 200000000",
+    "test:build": "mocha ./test/mocha/build.test.js --timeout 200000000",
+    "test:clean": "mocha ./test/mocha/clean.test.js --timeout 200000000",
+    "test:init": "mocha ./test/mocha/init.test.js --timeout 200000000",
+    "test:man": "mocha ./test/mocha/man.test.js --timeout 200000000",
+    "test:path": "mocha ./test/mocha/path.test.js --timeout 200000000",
+    "test:push": "mocha ./test/mocha/push.test.js --timeout 200000000",
+    "test:run": "mocha ./test/mocha/run.test.js --timeout 200000000",
+    "test:stop": "mocha ./test/mocha/stop.test.js --timeout 200000000",
+    "test:version": "mocha ./test/mocha/version.test.js --timeout 200000000"
   },
   "repository": {
     "type": "git",
@@ -100,16 +109,17 @@
     "chalk": "3.0.0",
     "commander": "4.1.1",
     "inquirer": "7.0.6",
-    "yyl-fs": "0.3.3",
     "yyl-os": "0.10.3",
     "yyl-print": "0.7.5",
     "yyl-replacer": "0.2.1",
     "yyl-util": "2.3.8"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^6.8.0",
     "eslint-plugin-node": "^11.0.0",
-    "ject": "^1.1.0",
+    "mocha": "^7.1.0",
+    "yyl-fs": "^0.3.3",
     "yyl-seed-test-util": "^0.3.1"
   }
 }

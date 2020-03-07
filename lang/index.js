@@ -11,7 +11,8 @@ module.exports = {
     PUSH: '推送到服务器',
     RUN: '运行 docker',
     STOP: '停止所有正在运行的 docker',
-    HELP: '显示帮助信息'
+    HELP: '显示帮助信息',
+    FORCE: '跳过二次确认执行'
   },
   RUN: {
     RUN_MANUAL: '手动运行此命令',
