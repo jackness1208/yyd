@@ -102,6 +102,7 @@ module.exports = function ({ env, config }) {
     .concat([''])
 
   if (!env.silent) {
+    // eslint-disable-next-line no-console
     console.log(logArr.join('\r\n'))
   }
 

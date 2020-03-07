@@ -8,6 +8,7 @@ const rp = require('yyl-replacer')
 
 const { INIT_PATH, PROJECT_PATH } = require('../lib/const')
 const { relativeIt } = require('../lib/util')
+const LANG = require('../lang/index')
 
 module.exports = async function ({ env }) {
   print.fn.cost.start()
@@ -92,7 +93,7 @@ module.exports = async function ({ env }) {
     const toPath = getToPath(iPath)
     const cnt = fs.readFileSync(iPath).toString()
     if (fs.existsSync(toPath)) {
-      print.log.warn(`file exists, keep it: ${chalk.yellow(relativeIt(toPath))}`)
+      print.log.warn(`${LANG.INIT.JUMP_EXISTS_FILE}: ${chalk.yellow(relativeIt(toPath))}`)
     } else {
       fs.writeFileSync(toPath, rp.dataRender(cnt, data))
       print.log.add(relativeIt(toPath))
@@ -111,6 +112,6 @@ module.exports = async function ({ env }) {
 
 
   print.fn.cost.end()
-  print.log.success(`init finished. cost ${chalk.green.bold(print.fn.cost.format())}`)
+  print.log.success(`${LANG.INIT.FINISHED}. cost ${chalk.green.bold(print.fn.cost.format())}`)
   return r
 }

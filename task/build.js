@@ -5,28 +5,31 @@ const extOs = require('yyl-os')
 
 const { PROJECT_PATH } = require('../lib/const')
 const { updateDockfile } = require('../lib/util')
+const LANG = require('../lang/index')
 
 module.exports = async function({ env, config }) {
   if (!config.repository) {
-    throw new Error('config.repository must have value')
+    throw new Error(LANG.RUN.REPOSITORY_NULL)
   }
 
   if (!config.tag) {
-    throw new Error('config.tag must have value')
+    throw new Error(LANG.RUN.TAG_NULL)
   }
 
-  updateDockfile()
+  updateDockfile({ config })
 
   let extend = ''
-  if (Object.keys(env)) {
-    extend = ` ${util.envStringify(env)}`
+  const rEnv = Object.assign({}, env)
+  delete rEnv.logLevel
+  if (Object.keys(rEnv)) {
+    extend = ` ${util.envStringify(rEnv)}`
   }
 
   const cmd = `docker image build ./ -t ${config.repository}:${config.tag}${extend}`
 
-  print.log.info(`run cmd: ${chalk.yellow.bold(cmd)}`)
+  print.log.info(`${LANG.RUN.RUN_CMD}: ${chalk.yellow.bold(cmd)}`)
   await extOs.runCMD(cmd, PROJECT_PATH)
 
-  print.log.success('build finished')
+  print.log.success(LANG.BUILD.FINISHED)
   return cmd
 }

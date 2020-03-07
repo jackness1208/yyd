@@ -3,6 +3,7 @@ const print = require('yyl-print')
 const inquirer = require('inquirer')
 const { queryDockerLogList } = require('../lib/util')
 const { PROJECT_PATH } = require('../lib/const')
+const LANG = require('../lang/index')
 const chalk = require('chalk')
 
 module.exports = async function ({ config }) {
@@ -45,11 +46,11 @@ module.exports = async function ({ config }) {
   const cleanIds = Object.keys(cleanMap).concat(noneList)
 
   if (!cleanIds.length) {
-    print.log.success('clean finished, no repository can be remove')
+    print.log.success(LANG.CLEAN.NO_REPOSITORY)
   } else {
     const cmd = `docker rmi -f ${cleanIds.join(' ')}`
 
-    let infoLog = `start clean ${cleanNames.join(', ')}${cleanNames.length ? ' and ' : ''}`
+    let infoLog = `${LANG.CLEAN.STRAT} ${cleanNames.join(', ')}${cleanNames.length ? ' and ' : ''}`
     infoLog = `${infoLog}<none> repository ${chalk.yellow.bold(noneList.length)} files`
     print.log.info(infoLog)
 
@@ -61,9 +62,9 @@ module.exports = async function ({ config }) {
     }])
 
     if (d.ok) {
-      print.log.cmd(`run cmd ${chalk.yellow.bold(cmd)}`)
+      print.log.cmd(`${LANG.RUN.RUN_CMD}: ${chalk.yellow.bold(cmd)}`)
       await extOs.runCMD(cmd, PROJECT_PATH)
-      print.log.success('clean finished')
+      print.log.success(LANG.CLEAN.FINISHED)
     }
   }
 

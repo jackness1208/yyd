@@ -3,18 +3,20 @@ const util = require('yyl-util')
 const extOs = require('yyl-os')
 
 const build = require('./build')
+const { history } = require('../lib/history')
+const LANG = require('../lang/index')
 
 module.exports = async function({ config, env }) {
   print.fn.cost.start()
   if (!config.repository) {
-    throw new Error('config.repository must have value')
+    throw new Error(LANG.RUN.REPOSITORY_NULL)
   }
 
   if (!config.tag) {
-    throw new Error('config.tag must have value')
+    throw new Error(LANG.RUN.TAG_NULL)
   }
 
-  await build({ env })
+  await build({ env, config })
 
   let { pushHost, pushPrefix, repository, tag } = config
 
@@ -49,9 +51,9 @@ module.exports = async function({ config, env }) {
   ]
 
   await util.forEach(cmds, async (cmd) => {
-    print.log.info(`run cmd: ${cmd}`)
+    print.log.info(`${LANG.RUN.RUN_CMD}: ${cmd}`)
     await extOs.runCMD(cmd, __dirname)
   })
   print.fn.cost.end()
-  print.log.success(`push finished, cost ${print.fn.cost.format()}`)
+  print.log.success(`${LANG.PUSH.FINISHED}, cost ${print.fn.cost.format()}`)
 }

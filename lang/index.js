@@ -28,5 +28,23 @@ module.exports = {
     FIND_RUNNIN_IMAGE: '查找运行中的镜像，名字为',
     NOT_FOUND: '没找到',
     DOCKER_MAC_IP: 'docker 物理 ip 地址'
+  },
+  BUILD: {
+    FINISHED: 'docker 镜像构建完成'
+  },
+  CLEAN: {
+    NO_REPOSITORY: '清理完成，没啥(repository)可清的',
+    STRAT: '开始清理',
+    FINISHED: '清理完成'
+  },
+  INIT: {
+    JUMP_EXISTS_FILE: '文件已存在，跳过',
+    FINISHED: '初始化完成'
+  },
+  PUSH: {
+    FINISHED: '推送完成'
+  },
+  STOP: {
+    FINISHED: '停止完成'
   }
 }
