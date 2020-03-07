@@ -13,7 +13,7 @@ function printHeader({ env }) {
   if (env.silent) {
     return
   }
-  print.log.ver(`init-me ${chalk.yellow.bold(PKG_VERSION)}`)
+  print.log.ver(`yyd ${chalk.yellow.bold(PKG_VERSION)}`)
 
   let keyIndex = -1
   process.argv.forEach((str, index) => {
