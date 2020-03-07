@@ -1,6 +1,10 @@
 # 历史信息
-## 0.3.0 (*)
+## 0.3.1 (2020-03-08)
+* feat: log 调整
+
+## 0.3.0 (2020-03-08)
 * feat: yyd 改造
+* feat: 新增 `yyd run dockername:tag` 方法
 * del: 去掉 config.commands 参数
 
 ## 0.2.3 (2019-06-16)
