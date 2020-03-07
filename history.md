@@ -1,49 +1,50 @@
 # 历史信息
 ## 0.3.0 (*)
-* [DEL] 去掉 config.commands 参数
+* feat: yyd 改造
+* del: 去掉 config.commands 参数
 
 ## 0.2.3 (2019-06-16)
-* [FIX] 修复 在配置 `config.port` 情况下 macos 执行 `yyd r` 会报错 `/sbin/init is not a directory` 的问题
+* fix: 修复 在配置 `config.port` 情况下 macos 执行 `yyd r` 会报错 `/sbin/init is not a directory` 的问题
 
 ## 0.2.2 (2019-03-28)
-* [FIX] 修复 `yyd run` `clean cache` 逻辑查询 cache 失败问题
+* fix: 修复 `yyd run` `clean cache` 逻辑查询 cache 失败问题
 
 ## 0.2.1 (2019-03-21)
-* [FIX] 修复 `yyd run` `config.portMap` 没配置会报错问题
-* [FIX] 修复 `yyd run` 不需要暴露端口的， 拆分为单独函数
+* fix: 修复 `yyd run` `config.portMap` 没配置会报错问题
+* fix: 修复 `yyd run` 不需要暴露端口的， 拆分为单独函数
 
 ## 0.2.0 (2019-03-20)
 * [EDIT] `yyd run` 重复执行时不会重新跑 `docker run` 命令
 * [EDIT] 兼容 `win 7` 系统的 docker 端口检查 命令
 
 ## 0.1.1-beta1 (2019-03-19)
-* [FIX] 修复 `yyd --config` 时， `config.volume` 路径 不对问题
+* fix: 修复 `yyd --config` 时， `config.volume` 路径 不对问题
 
 ## 0.1.0 (2019-03-07)
-* [ADD] `yyd init`
-* [ADD] `yyd b`
-* [ADD] `yyd build`
-* [ADD] `yyd p`
-* [ADD] `yyd push`
-* [ADD] `yyd p --tag beta`
-* [ADD] `yyd push --tag beta`
-* [ADD] `yyd man`
-* [ADD] `yyd -v`
-* [ADD] `yyd --version`
-* [ADD] `yyd -h`
-* [ADD] `yyd --help`
-* [ADD] `yyd stop`
-* [ADD] `yyd clean`
-* [ADD] `config.repository`
-* [ADD] `config.tag`
-* [ADD] `config.pushHost`
-* [ADD] `config.pushPrefix`
-* [ADD] `config.rewriteHistory`
-* [ADD] `config.portMap`
-* [ADD] `config.volume`
-* [ADD] `config.commands`
+* feat: `yyd init`
+* feat: `yyd b`
+* feat: `yyd build`
+* feat: `yyd p`
+* feat: `yyd push`
+* feat: `yyd p --tag beta`
+* feat: `yyd push --tag beta`
+* feat: `yyd man`
+* feat: `yyd -v`
+* feat: `yyd --version`
+* feat: `yyd -h`
+* feat: `yyd --help`
+* feat: `yyd stop`
+* feat: `yyd clean`
+* feat: `config.repository`
+* feat: `config.tag`
+* feat: `config.pushHost`
+* feat: `config.pushPrefix`
+* feat: `config.rewriteHistory`
+* feat: `config.portMap`
+* feat: `config.volume`
+* feat: `config.commands`
 
 ## 0.0.1 (2019-02-28)
-* [ADD] 先占个坑
+* feat: 先占个坑
 
 
