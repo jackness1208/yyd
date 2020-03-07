@@ -32,7 +32,7 @@ module.exports = async function({ config, env }) {
   }
 
   if (config.rewriteHistory) {
-    history.add(tag)
+    history.add({ tag, config })
   }
 
   let cmds = []
