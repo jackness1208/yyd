@@ -19,8 +19,17 @@ module.exports = async function({ env, config }) {
   updateDockfile({ config })
 
   let extend = ''
-  const rEnv = Object.assign({}, env)
-  delete rEnv.logLevel
+
+  const rEnv = {}
+  const ignoreOption = ['silent', 'logLevel']
+  Object.keys(env).forEach((key) => {
+    if (ignoreOption.indexOf(key) === -1) {
+      rEnv[key] = env[key]
+    }
+  })
+  if (env.silent) {
+    rEnv.quiet = true
+  }
   if (Object.keys(rEnv)) {
     extend = ` ${util.envStringify(rEnv)}`
   }

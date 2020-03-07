@@ -1,8 +1,7 @@
-const yyd = require('../../index')
-const { expect } = require('chai')
+const extOs = require('yyl-os')
 
 describe('yyd man', () => {
   it ('usage', async () => {
-    expect(await yyd.man({ silent: true })).not.to.equal(null)
+    await extOs.runCMD('yyd man --silent')
   })
 })

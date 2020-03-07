@@ -12,7 +12,7 @@ describe('yyd init', () => {
     await extFs.removeFiles(pjPath)
   })
   it ('usage', async () => {
-    await extOs.runCMD('yyd init', pjPath)
+    await extOs.runCMD('yyd init --silent', pjPath)
     expect(fs.readdirSync(pjPath).length).not.to.equal(0)
   })
 
