@@ -3,6 +3,6 @@ const { expect } = require('chai')
 
 describe('yyd version', () => {
   it ('usage', async () => {
-    expect(await yyd.version({ silent: true })).not.to.equal(null)
+    expect(await yyd.version({ env: {silent: true} })).not.to.equal(null)
   })
 })

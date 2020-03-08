@@ -21,7 +21,7 @@ module.exports = async function({ env, config }) {
   let extend = ''
 
   const rEnv = {}
-  const ignoreOption = ['silent', 'logLevel']
+  const ignoreOption = ['silent', 'logLevel', 'mode', 'tag', 'username', 'password']
   Object.keys(env).forEach((key) => {
     if (ignoreOption.indexOf(key) === -1) {
       rEnv[key] = env[key]

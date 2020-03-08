@@ -35,9 +35,9 @@ module.exports = async function({ config, env }) {
     modes = [env.mode]
   }
 
-  await util.forEach(modes, async (pushOption) => {
+  await util.forEach(modes, async (key) => {
     const { repository, tag } = config
-    const { host, prefix } = pushOption
+    const { host, prefix } = config.push[key]
 
     let pushPrefix = prefix
     let pushHost = host || ''
@@ -87,7 +87,9 @@ module.exports = async function({ config, env }) {
         printCMD = printCMD.replace(pwdReg, '$1 ********')
       }
       print.log.info(`${LANG.RUN.RUN_CMD}: ${printCMD}`)
-      await extOs.runCMD(cmd, __dirname)
+      await extOs.runCMD(cmd, __dirname).catch((er) => {
+        throw new Error(er)
+      })
     })
   })
 
