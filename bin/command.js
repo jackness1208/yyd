@@ -1,13 +1,10 @@
 const cmder = require('commander')
 const print = require('yyl-print')
 const chalk = require('chalk')
-const util = require('yyl-util')
-const { initConfig } = require('../lib/util')
+const { initConfig, formatEnv } = require('../lib/util')
 const { PKG_VERSION } = require('../lib/const')
 const LANG = require('../lang/index')
 const task = require('../index')
-
-const env = util.envParse(process.argv)
 
 function printHeader({ env }) {
   if (env.silent) {
@@ -30,13 +27,15 @@ function printHeader({ env }) {
 /** option */
 cmder
   .option('-p, --path', LANG.DESCRIPTION.PATH)
-  .on('option:path', () => {
+  .on('option:path', (cmder) => {
+    const env = formatEnv(cmder)
     task.path({ env })
   })
 
 cmder
   .option('-v, --version', LANG.DESCRIPTION.VERSION)
-  .on('option:version', () => {
+  .on('option:version', (cmder) => {
+    const env = formatEnv(cmder)
     task.version({ env })
   })
 
@@ -56,7 +55,8 @@ cmder
   .alias('b')
   .allowUnknownOption(true)
   .description(LANG.DESCRIPTION.BUILD)
-  .action((env) => {
+  .action((cmder) => {
+    const env = formatEnv(cmder)
     printHeader({ env })
     const config = initConfig()
     task.build({ config, env }).catch((er) => {
@@ -69,7 +69,8 @@ cmder
   .command('clean')
   .option('--force', LANG.DESCRIPTION.FORCE)
   .description(LANG.DESCRIPTION.CLEAN)
-  .action(() => {
+  .action((cmder) => {
+    const env = formatEnv(cmder)
     const config = initConfig()
     task.clean({ config }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
@@ -80,7 +81,8 @@ cmder
 cmder
   .command('init')
   .description(LANG.DESCRIPTION.INIT)
-  .action((env) => {
+  .action((cmder) => {
+    const env = formatEnv(cmder)
     printHeader({ env })
     task.init({ env }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
@@ -91,8 +93,10 @@ cmder
 cmder
   .command('man')
   .description(LANG.DESCRIPTION.MAN)
-  .action(() => {
+  .action((cmder) => {
+    const env = formatEnv(cmder)
     const config = initConfig()
+    print.cleanScreen()
     task.man({ env, config }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
     })
@@ -107,7 +111,9 @@ cmder
   .option('-m, --mode <mode>', LANG.DESCRIPTION.MODE)
   .option('-p, --password <pwd>', LANG.DESCRIPTION.PASSWORD)
   .option('-u, --username <usr>', LANG.DESCRIPTION.USERNAME)
-  .action((env) => {
+  .action((cmder) => {
+    const env = formatEnv(cmder)
+    console.log(env)
     const config = initConfig()
     task.push({ env, config }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
@@ -119,7 +125,8 @@ cmder
   .command('run [name]')
   .alias('r')
   .description(LANG.DESCRIPTION.RUN)
-  .action((name, env) => {
+  .action((name, cmder) => {
+    const env = formatEnv(cmder)
     let config = {}
     if (!name) {
       config = initConfig()
@@ -133,7 +140,8 @@ cmder
 cmder
   .command('stop')
   .description(LANG.DESCRIPTION.STOP)
-  .action((env) => {
+  .action((cmder) => {
+    const env = formatEnv(cmder)
     const config = initConfig()
     task.stop({ env, config }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
