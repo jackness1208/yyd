@@ -8,25 +8,29 @@ module.exports = function ({ env, config }) {
   }
 
   let manPush = []
-  const iPrefix = config.pushPrefix ? `${config.pushPrefix}/` : ''
-  if (config.pushHost) {
-    const remoteTag = `${config.pushHost}${iPrefix ? `/${iPrefix}` : ''}${name}`
-    manPush = [
-      ` ${chalk.white('# push')}`,
-      ` ${chalk.gray('## step 1: login')}`,
-      ` ${chalk.yellow.bold(`docker login ${config.pushHost}`)}`,
-      ` ${chalk.gray('## step 2: link')}`,
-      ` ${chalk.yellow.bold(`docker docker tag ${name} ${remoteTag}`)}`,
-      ` ${chalk.gray('## step 3: push')}`,
-      ` ${chalk.yellow(`docker push ${remoteTag}`)}`
-    ]
+  if (config.push) {
+    Object.keys(config.push).forEach((key) => {
+      const pushHost = config.push[key].host || ''
+      const pushPrefix = config.push[key].prefix
+      const iPrefix = pushPrefix ? `${pushPrefix}/` : ''
+      const remoteTag = `${pushHost}${iPrefix ? `/${iPrefix}` : ''}${name}`
+      manPush = manPush.concat([
+        ` ${chalk.white(`# push - ${key}`)}`,
+        ` ${chalk.gray('## step 1: login')}`,
+        ` ${chalk.yellow.bold(`docker login ${pushHost}`)}`,
+        ` ${chalk.gray('## step 2: link')}`,
+        ` ${chalk.yellow.bold(`docker docker tag ${name} ${remoteTag}`)}`,
+        ` ${chalk.gray('## step 3: push')}`,
+        ` ${chalk.yellow(`docker push ${remoteTag}`)}`
+      ])
+    })
   } else {
     manPush = [
       ` ${chalk.white('# push')}`,
       ` ${chalk.gray('## step 1: login')}`,
       ` ${chalk.yellow.bold('docker login')}`,
       ` ${chalk.gray('## step 2: push')}`,
-      ` ${chalk.yellow.bold(`docker push  ${iPrefix}${name}`)}`
+      ` ${chalk.yellow.bold(`docker push ${name}`)}`
     ]
   }
 
