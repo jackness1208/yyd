@@ -1,6 +1,6 @@
 {
   "name": "yyd",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "preferGlobal": true,
   "engines": {
     "node": ">= 8.0.0"
@@ -112,6 +112,7 @@
     "yyl-os": "0.10.3",
     "yyl-print": "0.7.5",
     "yyl-replacer": "0.2.1",
+    "yyl-fs": "0.3.3",
     "yyl-util": "2.3.8"
   },
   "devDependencies": {
@@ -119,7 +120,6 @@
     "eslint": "^6.8.0",
     "eslint-plugin-node": "^11.0.0",
     "mocha": "^7.1.0",
-    "yyl-fs": "^0.3.3",
     "yyl-seed-test-util": "^0.3.1"
   }
 }
