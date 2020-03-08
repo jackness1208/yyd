@@ -113,7 +113,6 @@ cmder
   .option('-u, --username <usr>', LANG.DESCRIPTION.USERNAME)
   .action((cmder) => {
     const env = formatEnv(cmder)
-    console.log(env)
     const config = initConfig()
     task.push({ env, config }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
