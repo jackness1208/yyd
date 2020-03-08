@@ -12,7 +12,11 @@ module.exports = {
     RUN: '运行 docker',
     STOP: '停止所有正在运行的 docker',
     HELP: '显示帮助信息',
-    FORCE: '跳过二次确认执行'
+    FORCE: '跳过二次确认执行',
+    TAG: '版本标签, 默认是当前版本 + latest',
+    MODE: '推送模式，默认为 default',
+    PASSWORD: '密码',
+    USERNAME: '用户名'
   },
   RUN: {
     RUN_MANUAL: '手动运行此命令',
@@ -43,6 +47,10 @@ module.exports = {
     FINISHED: '初始化完成'
   },
   PUSH: {
+    PUSH_NULL: '未设置 config.push',
+    PUSH_LENGTH_0: '请至少设置1个 push type 如 config.push.default: { host?: string, prefix?: string}',
+    MODE_NOT_EXISTS: '不存在于列表',
+    PWD_NULL: '请配置登录密码',
     FINISHED: '推送完成'
   },
   STOP: {

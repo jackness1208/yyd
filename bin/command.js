@@ -27,73 +27,64 @@ function printHeader({ env }) {
   }
 }
 
-let IS_MATCH = false
+/** option */
+cmder
+  .option('-p, --path', LANG.DESCRIPTION.PATH)
+  .on('option:path', () => {
+    task.path({ env })
+  })
 
-/** path */
-cmder.option('-p, --path', LANG.DESCRIPTION.PATH, () => {
-  task.path({ env })
-  IS_MATCH = true
-})
+cmder
+  .option('-v, --version', LANG.DESCRIPTION.VERSION)
+  .on('option:version', () => {
+    task.version({ env })
+  })
 
-/** version */
-cmder.option('-v, --version', LANG.DESCRIPTION.VERSION, () => {
-  task.version({ env })
-  IS_MATCH = true
-})
-
-/** options */
 cmder
   .option('-q, --silent', LANG.DESCRIPTION.SILENT, () => {
     print.log.silent(true)
+    return true
   })
-  .option('--logLevel <level>', LANG.DESCRIPTION.LOG_LEVEL, (level) => {
+  .option('--logLevel <number>', LANG.DESCRIPTION.LOG_LEVEL, (level) => {
     print.log.setLogLevel(level)
-  })
-  .option('--force', LANG.DESCRIPTION.FORCE)
-
-cmder
-  .option('-h, --help', LANG.DESCRIPTION.HELP, () => {
-    print.cleanScreen()
-    cmder.outputHelp()
-    IS_MATCH = true
+    return level
   })
 
 /** build */
 cmder
   .command('build')
   .alias('b')
+  .allowUnknownOption(true)
   .description(LANG.DESCRIPTION.BUILD)
-  .action(() => {
+  .action((env) => {
     printHeader({ env })
     const config = initConfig()
     task.build({ config, env }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
     })
-    IS_MATCH = true
   })
 
 /** clean */
 cmder
   .command('clean')
+  .option('--force', LANG.DESCRIPTION.FORCE)
   .description(LANG.DESCRIPTION.CLEAN)
   .action(() => {
     const config = initConfig()
     task.clean({ config }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
     })
-    IS_MATCH = true
   })
 
 /** init */
 cmder
   .command('init')
   .description(LANG.DESCRIPTION.INIT)
-  .action(() => {
+  .action((env) => {
     printHeader({ env })
     task.init({ env }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
     })
-    IS_MATCH = true
   })
 
 /** man */
@@ -105,7 +96,6 @@ cmder
     task.man({ env, config }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
     })
-    IS_MATCH = true
   })
 
 /** push */
@@ -113,12 +103,15 @@ cmder
   .command('push')
   .alias('p')
   .description(LANG.DESCRIPTION.PUSH)
-  .action(() => {
+  .option('-t, --tag <tagName>', LANG.DESCRIPTION.TAG)
+  .option('-m, --mode <mode>', LANG.DESCRIPTION.MODE)
+  .option('-p, --password <pwd>', LANG.DESCRIPTION.PASSWORD)
+  .option('-u, --username <usr>', LANG.DESCRIPTION.USERNAME)
+  .action((env) => {
     const config = initConfig()
     task.push({ env, config }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
     })
-    IS_MATCH = true
   })
 
 /** run */
@@ -126,7 +119,7 @@ cmder
   .command('run [name]')
   .alias('r')
   .description(LANG.DESCRIPTION.RUN)
-  .action((name) => {
+  .action((name, env) => {
     let config = {}
     if (!name) {
       config = initConfig()
@@ -134,26 +127,27 @@ cmder
     task.run({ env, config, name }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
     })
-    IS_MATCH = true
   })
 
 /** stop */
 cmder
   .command('stop')
   .description(LANG.DESCRIPTION.STOP)
-  .action(() => {
+  .action((env) => {
     const config = initConfig()
     task.stop({ env, config }).catch((er) => {
       print.log.error(env.logLevel === 2 ? er : er.message)
     })
-    IS_MATCH = true
   })
 
-cmder.parse(process.argv)
 
+
+cmder.parse(process.argv)
 cmder.name('yyd')
 
-if (!IS_MATCH) {
-  print.cleanScreen()
-  cmder.outputHelp()
-}
+cmder
+  .command('*')
+  .action(() => {
+    print.cleanScreen()
+    cmder.outputHelp()
+  })
