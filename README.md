@@ -61,6 +61,12 @@ yyd clean
 
 ### yyd man
 ```
-显示 常用 的 docker 操作命令
+# 显示 常用 的 docker 操作指引
 yyd man
+```
+
+### yyd doctor
+```
+# 用于检查 docker 环境依赖
+yyd doctor
 ```

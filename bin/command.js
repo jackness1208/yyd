@@ -89,6 +89,18 @@ cmder
     })
   })
 
+/** doctor */
+cmder
+  .command('doctor')
+  .description(LANG.DESCRIPTION.DOCTOR)
+  .action((cmder) => {
+    const env = formatEnv(cmder)
+    task.doctor({ env }).catch((er) => {
+      print.log.error(env.logLevel === 2 ? er : er.message)
+    })
+  })
+
+
 /** man */
 cmder
   .command('man')

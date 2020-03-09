@@ -16,7 +16,8 @@ module.exports = {
     TAG: '版本标签, 默认是当前版本 + latest',
     MODE: '推送模式，默认为 default',
     PASSWORD: '密码',
-    USERNAME: '用户名'
+    USERNAME: '用户名',
+    DOCTOR: '检查当前 docker 环境状况'
   },
   RUN: {
     RUN_MANUAL: '手动运行此命令',
@@ -55,5 +56,10 @@ module.exports = {
   },
   STOP: {
     FINISHED: '停止完成'
+  },
+  DOCTOR: {
+    CHECKING_LIST: '运行环境检查',
+    DEAMON_NOT_RUN: '未启动',
+    ALL_PASS: '检查完成，没啥问题'
   }
 }
