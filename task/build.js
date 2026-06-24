@@ -34,7 +34,7 @@ module.exports = async function({ env, config }) {
     extend = ` ${util.envStringify(rEnv)}`
   }
 
-  const cmd = `docker image build ./ -t ${config.repository}:${config.tag}${extend}`
+  const cmd = `docker image build ./ -t ${config.repository}:${config.tag}${extend} --platform linux/amd64,linux/arm64`
 
   print.log.info(`${LANG.RUN.RUN_CMD}: ${chalk.yellow.bold(cmd)}`)
   await extOs.runCMD(cmd, PROJECT_PATH)
